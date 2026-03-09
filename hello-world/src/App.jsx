@@ -1,9 +1,12 @@
+import Hello from './hello'
+
 function App() {
 
   return (
-    <h1>
+    <>
+        <Hello />
       Hello World!
-    </h1>
+    </>
   )
 }
 
