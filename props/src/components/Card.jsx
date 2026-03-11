@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Card({userName}) {
+function Card({userNameai}) {
   return (
     <div
       className="flex flex-col rounded-xl  p-4"
