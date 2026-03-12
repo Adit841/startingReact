@@ -1,7 +1,7 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 
 function App() {
-  const [length, setLength] = useState(8);
+  const [length, setLength] = useState(6);
   const [number, setNumber] = useState(false);
   const [char, setChar] = useState(false);
   const [password, setPassword] = useState("");
@@ -14,14 +14,15 @@ function App() {
 
     for(let i=1; i <= length; i++){
       let char = Math.floor(Math.random() * str.length + 1);
-      pass = str.charAt(char)
+      pass += str.charAt(char)
     }
 
     setPassword(pass);
   }, [length, number, char, setPassword])
 
-
-
+useEffect(() => {
+  passwordGenerator();
+}, [length, number, char, passwordGenerator])
   return (
     <>
     <div className="w-full max-w-md mx-auto shadow-md rounded-lg px-4 py-3 my-8 bg-gray-800 text-orange-500">
@@ -41,11 +42,11 @@ function App() {
       <div className='flex text-sm gap-x-2'>
         <div className='flex items-center gap=x=1'>
           <input type="range"
-          main={6}
+          min={6}
           max={100}
           value={length}
           className='cursor-pointer'
-          onChange={ () => {
+          onChange={ (e) => {
             setLength(e.target.value)
           }}
            />
