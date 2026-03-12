@@ -1,10 +1,13 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, useRef} from 'react'
+import './App.css'
 
 function App() {
   const [length, setLength] = useState(6);
   const [number, setNumber] = useState(false);
   const [char, setChar] = useState(false);
   const [password, setPassword] = useState("");
+
+  const passwordRef = useRef(null);
 
   const passwordGenerator = useCallback(() => {
     let pass = "";
@@ -20,6 +23,12 @@ function App() {
     setPassword(pass);
   }, [length, number, char, setPassword])
 
+  const copyPasswordToClipboard = useCallback(() => {
+    passwordRef.current?.select();
+    // passwordRef.current?.setSelectionRange(0, 3)
+    window.navigator.clipboard.writeText(password);
+  },[password]) 
+
 useEffect(() => {
   passwordGenerator();
 }, [length, number, char, passwordGenerator])
@@ -34,8 +43,10 @@ useEffect(() => {
             className="w-full p-2 rounded bg-white text-black"
             placeholder="Password"
             readOnly
+            ref = {passwordRef}
         />
         <button 
+        onClick={copyPasswordToClipboard}
         className='outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0'
         >Copy</button>
       </div>
@@ -67,7 +78,7 @@ useEffect(() => {
           defaultChecked = {char}
           id='characterInput'
           onChange={() => {
-            setNumber((prev) => !prev);
+            setChar((prev) => !prev);
           }} 
           />
           <label htmlFor="characterInput">Character</label>
