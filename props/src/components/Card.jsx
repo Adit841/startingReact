@@ -13,7 +13,7 @@ function Card({userNameai}) {
     >
       <div>
         <img
-          src="https://res.cloudinary.com/ddcg0rzlo/image/upload/v1652470298/9StaF0UBJfih_df0248.gif"
+          src="https://www.pexels.com/photo/spring-picnic-in-sunlit-park-setting-32128848/"
           alt="nft-gif"
           width="150"
           height="150"
